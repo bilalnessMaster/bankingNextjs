@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import Image from "next/image";
 
 
 export const metadata: Metadata = {
@@ -16,8 +17,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main>
+    <main className="flex min-h-screen w-full">
+      
       {children}
+      <div className="auth-asset">
+        <div>
+          <Image src='/icons/auth-image.svg' width={500}  height={500} alt="auth image"/>
+        </div>
+      </div>
+
     </main>
   );
 }
