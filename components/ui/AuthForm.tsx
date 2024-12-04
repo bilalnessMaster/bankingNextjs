@@ -22,6 +22,7 @@ import { Loader } from "lucide-react";
 import { authFormSchema } from "@/lib/utils";
 import { signIn, signUp } from "@/lib/actions/user.actions";
 import { useRouter } from "next/navigation";
+import PlaidLink from "./PlaidLink";
 
 
 
@@ -48,8 +49,21 @@ const AuthForm = ({ type }: { type: "signIn" | "signUp" }) => {
   const  onSubmit = async (data: z.infer<typeof authForm>) => {
             try{
               setIsloading(true)
-             if(type === 'signUp'){
-                const response = await signUp(data)
+              
+              if(type === 'signUp'){
+                const userData = {
+                  firstName: data.firstName!,
+                  lastName: data.lastName!,
+                  address1: data.address1!,
+                  city: data.city!,
+                  state: data.state!,
+                  postalCode: data.postalCode!,
+                  dateOfBirth: data.dateOfBirth!,
+                  ssn: data.ssn!,
+                  email: data.email,
+                  password: data.password
+                }
+                const response = await signUp(userData)
                 setUser(response)
              }
              if(type === 'signIn'){
@@ -98,9 +112,11 @@ const AuthForm = ({ type }: { type: "signIn" | "signUp" }) => {
           </h1>
         </div>
       </header>
-      {user ? (
-        <div className="flex flex-col gap-4 ">{/* plaidlink */}</div>
-      ) : (
+      {/* {user ? ( */}
+        <div className="flex flex-col gap-4 ">
+          <PlaidLink user={user} variant={'primary'} /> 
+          </div>
+      {/* // ) : ( */}
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           {type === "signUp" && (
@@ -200,7 +216,7 @@ const AuthForm = ({ type }: { type: "signIn" | "signUp" }) => {
             </div>
           </form>
         </Form>
-      )}
+      {/* )} */}
      {
       !user && (
         <footer className="flex justify-center items-center gap-1">
