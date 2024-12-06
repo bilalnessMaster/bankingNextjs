@@ -112,11 +112,12 @@ const AuthForm = ({ type }: { type: "signIn" | "signUp" }) => {
           </h1>
         </div>
       </header>
-      {/* {user ? ( */}
+      {user ? (
         <div className="flex flex-col gap-4 ">
+          <h2>uwu</h2>
           <PlaidLink user={user} variant={'primary'} /> 
           </div>
-      {/* // ) : ( */}
+      ) : ( 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           {type === "signUp" && (
@@ -216,7 +217,7 @@ const AuthForm = ({ type }: { type: "signIn" | "signUp" }) => {
             </div>
           </form>
         </Form>
-      {/* )} */}
+       )} 
      {
       !user && (
         <footer className="flex justify-center items-center gap-1">

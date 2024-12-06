@@ -68,7 +68,8 @@ export const getAccount = async ({ appwriteItemId }: getAccountProps) => {
   try {
     // get bank from db
     const bank = await getBank({ documentId: appwriteItemId });
-
+    
+    
     // get account info from plaid
     const accountsResponse = await plaidClient.accountsGet({
       access_token: bank.accessToken,
@@ -91,7 +92,8 @@ export const getAccount = async ({ appwriteItemId }: getAccountProps) => {
         type: transferData.senderBankId === bank.$id ? "debit" : "credit",
       })
     );
-
+    console.log("this transitions "+transferTransactions);
+    
     // get institution info from plaid
     const institution = await getInstitution({
       institutionId: accountsResponse.data.item.institution_id!,
@@ -124,7 +126,7 @@ export const getAccount = async ({ appwriteItemId }: getAccountProps) => {
       transactions: allTransactions,
     });
   } catch (error) {
-    console.error("An error occurred while getting the account:", error);
+    console.error("Error getAccount :", error);
   }
 };
 
@@ -142,7 +144,7 @@ export const getInstitution = async ({
 
     return parseStringify(intitution);
   } catch (error) {
-    console.error("An error occurred while getting the accounts:", error);
+    console.error("An error occurred while getting the institution:", error);
   }
 };
 
@@ -156,8 +158,10 @@ export const getTransactions = async ({
   try {
     // Iterate through each page of new transaction updates for item
     while (hasMore) {
+      console.log("this access " +accessToken);
+      
       const response = await plaidClient.transactionsSync({
-        access_token: accessToken,
+        access_token : accessToken,
       });
 
       const data = response.data;
@@ -179,7 +183,7 @@ export const getTransactions = async ({
     }
 
     return parseStringify(transactions);
-  } catch (error) {
-    console.error("An error occurred while getting the accounts:", error);
+  } catch(error) {
+    console.error("An error occurred while getting the transitions:",  error);
   }
 };
