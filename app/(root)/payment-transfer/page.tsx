@@ -1,6 +1,7 @@
 
-import PaymentTransferForm from '@/components/PaymentTransferForm'
+
 import Header from '@/components/ui/Header';
+import PaymentTransferForm from '@/components/ui/PaymentTransferForm';
 import { getAccounts } from '@/lib/actions/bank.actions';
 import { getLoggedInUser } from '@/lib/actions/user.actions';
 import React from 'react'

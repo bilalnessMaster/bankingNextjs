@@ -14,7 +14,7 @@ const Home = async ({ searchParams : {id  , page}} : SearchParamProps) => {
     userId: loggedIn?.$id 
   })
 
-  if(!accounts) return;
+  if(!accounts) return redirect('/sign-in');
   const accountData = accounts?.data
   const appwriteItemId = (id as string ) || accountData[0]?.appwriteItemId;
 
@@ -31,7 +31,7 @@ const Home = async ({ searchParams : {id  , page}} : SearchParamProps) => {
           <Header
             type="greeting"
             title="Welcome"
-            user={loggedIn.name}
+            user={loggedIn.firstName}
             subtext="Access and mange your account and transaction efficiently."
           />
           <TotalBalance
@@ -47,7 +47,7 @@ const Home = async ({ searchParams : {id  , page}} : SearchParamProps) => {
         page={currentPage}
         />
       </div>
-      {/* <RightSideBar user={loggedIn} transactions={account?.transactions} banks={accountData?.slice(0,2)} /> */}
+      <RightSideBar user={loggedIn} transactions={account?.transactions} banks={accountData?.slice(0,2)} />
     </section>
   );
 };

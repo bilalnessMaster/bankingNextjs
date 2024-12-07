@@ -3,7 +3,7 @@ import MobileNav from "@/components/ui/MobileNav";
 import Sidebar from "@/components/ui/Sidebar";
 import { getLoggedInUser } from "@/lib/actions/user.actions";
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+
 import Image from "next/image";
 
 
